@@ -13,8 +13,30 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
+    hibernate:
+      ddl-auto: update #create: 프로젝트를 실행할 때마다 새로 만듦
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+
+    jackson:
+      serialization:
+        fail-on-empty-beans: false
+
+    http:
+      encoding:
+        charset: UTF-8
+        enabled: true
+        foce: true
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
     username: hahm
-    password: 0726
+    password: yh135790
