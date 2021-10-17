@@ -7,7 +7,7 @@
     <!--username 입력 시작-->
     <div class="form-group">
       <label for="username">Username:</label>
-      <input type="email" class="form-control" placeholder="Username 입력" id="username">
+      <input type="text" class="form-control" placeholder="Username 입력" id="username">
     </div>
     <!--username 입력 끝-->
 
