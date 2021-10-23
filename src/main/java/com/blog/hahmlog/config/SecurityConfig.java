@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/","/auth/**","/js/**","/css/**","/image/**","/dummy/**") //  해당 경로들에 대한 모든 request에 대해
                 .permitAll() //권한을 주고
-                .anyRequest() //다른 모든 request에 대해
+                .anyRequest() //다른 모든 request(/board/** 등)에 대해
                 .authenticated() //인증이 되어야한다
                 .and()
                 .formLogin()
