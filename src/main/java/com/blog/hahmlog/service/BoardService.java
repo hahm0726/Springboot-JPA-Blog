@@ -6,6 +6,8 @@ import com.blog.hahmlog.model.User;
 import com.blog.hahmlog.repository.BoardRepository;
 import com.blog.hahmlog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +28,7 @@ public class BoardService {
     }
 
     @Transactional
-    public List<Board> getAllBoard() {
-        return boardRepository.findAll();
+    public Page<Board> getAllBoard(Pageable pageable) {
+        return boardRepository.findAll(pageable);
     }
 }
