@@ -3,7 +3,7 @@
 <%@include file="../layout/header.jsp" %>
 
 <div class="container">
-  <form action="/auth/loginProc" method="post">
+  <form>
     <div class="form-group">
       <label for="title">제목:</label>
       <input type="text" class="form-control" placeholder="제목을 입력하세요" id="title">
