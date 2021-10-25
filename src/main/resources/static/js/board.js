@@ -5,7 +5,7 @@ let index = {
         });
 
         $("#btn-update").on("click",()=>{
-            this.save();
+            this.update();
         });
 
         $("#btn-delete").on("click",()=>{
@@ -39,7 +39,8 @@ let index = {
     },
 
     deleteById:function(){
-        var boardId = $("#boardId").text();
+
+        let boardId = $("boardId").text();
 
         $.ajax({
             //삭제수행 요청
@@ -49,6 +50,29 @@ let index = {
         }).done(function(res){
             alert("게시글이 삭제되었습니다.");
             location.href="/";
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
+
+    update:function(){
+        let boardId = $("#boardId").val();
+
+        let data={
+            title:$("#title").val(),
+            content:$("#content").val()
+        };
+
+        $.ajax({
+            //글수정 요청
+            type: "PUT",
+            url: "/api/board/" + boardId,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType:"json"
+        }).done(function(res){
+            alert("수정이 완료되었습니다.");
+            location.href="/board/"+boardId;
         }).fail(function(error){
             alert(JSON.stringify(error));
         });

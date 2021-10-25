@@ -28,4 +28,10 @@ public class BoardApiController {
         boardService.deleteBoard(id);
         return new ResponseDto<>(HttpStatus.OK.value(),1); // 자바 오브젝트를 json 으로 변환해 반환(Jackson)
     }
+
+    @PutMapping("/api/board/{id}")
+    public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
+        boardService.updateBoard(id,board);
+        return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
 }
