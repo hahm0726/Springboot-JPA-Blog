@@ -3,10 +3,16 @@
 <%@include file="../layout/header.jsp" %>
 
 <div class="container">
-  <div class="btn-group">
+  <div class="btn-group mb-3">
     <button class="btn btn-secondary" onclick="history.back()">목록</button>
-    <button id="btn-update" class="btn btn-warning">수정</button>
-    <button id="btn-delete" class="btn btn-danger">삭제</button>
+    <c:if test="${board.user.id == principal.user.id}">
+      <button id="btn-update" class="btn btn-warning">수정</button>
+      <button id="btn-delete" class="btn btn-danger">삭제</button>
+    </c:if>
+  </div>
+  <div class="mb-3">
+    글 번호 : <span id="boardId"><i>${board.id}</i></span>
+    작성자 : <span id=""><i>${board.user.username}</i></span>
   </div>
   <div>
     <h3>${board.title}</h3>
