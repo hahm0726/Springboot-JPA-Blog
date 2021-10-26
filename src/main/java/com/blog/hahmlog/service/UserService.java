@@ -41,7 +41,6 @@ public class UserService {
             return new IllegalArgumentException("해당 유저를 찾을 수 없습니다.");
         });
         String rawPassword = requestUser.getPassword();
-
         originUser.setPassword(encoder.encode(rawPassword));
         originUser.setEmail(requestUser.getEmail());
     }

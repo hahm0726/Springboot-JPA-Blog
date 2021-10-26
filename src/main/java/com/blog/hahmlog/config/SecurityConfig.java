@@ -4,6 +4,7 @@ import com.blog.hahmlog.config.auth.PrincipalDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,6 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean // IoC가 됨. 함수가 리턴하는 객체를 관리함
     public BCryptPasswordEncoder encodePWD(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     // 시큐리티가 대신 로그인해주는데 password를 가로채기를 하는데

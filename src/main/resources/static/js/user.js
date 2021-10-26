@@ -43,6 +43,7 @@ let index = {
 
         let data={
             id:$("#userId").val(),
+            username:$("#username").val(),
             password:$("#password").val(),
             email:$("#email").val()
         };
