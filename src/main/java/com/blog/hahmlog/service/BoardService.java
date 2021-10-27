@@ -1,5 +1,6 @@
 package com.blog.hahmlog.service;
 
+import com.blog.hahmlog.dto.ReplySaveRequestDto;
 import com.blog.hahmlog.model.Board;
 import com.blog.hahmlog.model.Reply;
 import com.blog.hahmlog.model.Role;
@@ -10,18 +11,17 @@ import com.blog.hahmlog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BoardService {
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     ReplyRepository replyRepository;
@@ -69,14 +69,21 @@ public class BoardService {
     }
 
     @Transactional
-    public void createReply(Reply reply, int boardId,User user) {
+    public void createReply(ReplySaveRequestDto replySaveRequestDto) {
 
-        Board board = boardRepository.findById(boardId).orElseThrow(()->{
+        Board board = boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(()->{
             return new IllegalArgumentException("댓글쓰기 실패: 게시글을 찾을 수 없습니다");
         }); //board 영속화 완료
 
-        reply.setBoard(board);
-        reply.setUser(user);
+        User user = userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(() -> {
+            return new IllegalArgumentException("댓글쓰기 실패: 유저를 찾을 수 없습니다");
+        }); //user 영속화 완료
+
+        Reply reply = Reply.builder()
+                .board(board)
+                .user(user)
+                .content(replySaveRequestDto.getContent())
+                .build();
 
         replyRepository.save(reply);
     }
