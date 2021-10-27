@@ -41,8 +41,14 @@ public class BoardApiController {
     // dto를 사용하지 않은 이유는? => 작은 프로젝트라 적용하지 않음
     // 하지만 dto를 사용하지 않아 많은 필드들이 생성됨
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> save(@RequestBody ReplySaveRequestDto replySaveRequestDto){ //user = {username, password, email}
+    public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto){ //user = {username, password, email}
         boardService.createReply(replySaveRequestDto);
         return new ResponseDto<>(HttpStatus.OK.value(),1); // 자바 오브젝트를 json 으로 변환해 반환(Jackson)
+    }
+
+    @DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+    public ResponseDto<Integer> replyDelete(@PathVariable int replyId){
+        boardService.deleteReply(replyId);
+        return new ResponseDto<>(HttpStatus.OK.value(),1);
     }
 }
