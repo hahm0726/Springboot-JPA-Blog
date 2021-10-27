@@ -32,6 +32,9 @@ let index = {
             contentType: "application/json; charset=utf-8", // body 데이터가 어떤 타입인지(MIME)
             dataType:"json" //응답의 결과가 생긴게 json 이라면 => javascript 오브젝트로 변경(done에 res)
         }).done(function(res){
+            if(res.status==500){
+                alert("회원가입에 실패했습니다.");
+            }
             alert("회원가입이 완료되었습니다");
             location.href="/";
         }).fail(function(error){
