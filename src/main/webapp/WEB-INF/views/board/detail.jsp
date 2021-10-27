@@ -15,10 +15,10 @@
       <h3>${board.title}</h3>
     </div>
     <div class="d-flex">
-      글번호: <span id="boardId" class="mr-2"><i>${board.id}</i></span>
-      작성자: <span id="boardUser" class="mr-2"><i>${board.user.username}</i></span>
-      작성일자: <span id="boardDate" class="mr-2"><i><fmt:formatDate value="${board.createDate}" pattern="yyyy-MM-dd HH:mm"/></i></span>
-      조회수: <span id="boardCnt"><i>${board.count}</i></span>
+      글번호: <span class="mr-2"><i>${board.id}</i></span>
+      작성자: <span class="mr-2"><i>${board.user.username}</i></span>
+      작성일자: <span class="mr-2"><i><fmt:formatDate value="${board.createDate}" pattern="yyyy-MM-dd HH:mm"/></i></span>
+      조회수: <span><i>${board.count}</i></span>
     </div>
   </div>
   <hr/>
@@ -28,19 +28,30 @@
   <hr/>
 
   <div class="card">
-    <div class="card-body"><textarea class="form-control" rows="1"></textarea></div>
-    <div class="card-footer"><button class="btn btn-primary">등록</button></div>
+    <form>
+      <input type="hidden" id="boardId" value="${board.id}">
+      <div class="card-body">
+        <textarea id="reply-content" class="form-control" rows="1"></textarea>
+      </div>
+      <div class="card-footer d-flex justify-content-end">
+        <button type=button id="btn-reply-save" class="btn btn-primary">등록</button>
+      </div>
+    </form>
   </div>
   <div class="card">
     <div class="card-header">댓글 리스트</div>
-    <ul id="comment--box" class="list-group">
-      <li clas="list--group-item d-flex justify-content-between">
-        <div>댓글 내용</div>
-        <div class="d-flex">
-          <div class="font-italic">작성자:</div>
-          <button class="badge">삭제</button>
-        </div>
-      </li>
+    <ul id="reply--box" class="list-group">
+      <c:forEach var="reply" items="${board.replies}">
+        <li class="list-group-item d-flex justify-content-between">
+          <div>${reply.content}</div>
+          <div class="d-flex">
+            <div class="font-italic">작성자: ${reply.user.username} &nbsp;</div>
+            <c:if test="${principal.user.id==reply.user.id}">
+              <button class="badge">삭제</button>
+            </c:if>
+          </div>
+        </li>
+      </c:forEach>
     </ul>
   </div>
 

@@ -1,9 +1,11 @@
 package com.blog.hahmlog.service;
 
 import com.blog.hahmlog.model.Board;
+import com.blog.hahmlog.model.Reply;
 import com.blog.hahmlog.model.Role;
 import com.blog.hahmlog.model.User;
 import com.blog.hahmlog.repository.BoardRepository;
+import com.blog.hahmlog.repository.ReplyRepository;
 import com.blog.hahmlog.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ public class BoardService {
 
     @Autowired
     BoardRepository boardRepository;
+
+    @Autowired
+    ReplyRepository replyRepository;
 
     //글 생성 기능
     @Transactional
@@ -61,5 +66,18 @@ public class BoardService {
         originBoard.setContent(requestBoard.getContent());
         //updateBoard 함수가 종료될 때(Service가 종료될 때) 트랜잭션이 종료. 이때 더티체킹 수행발생
         //==> 영속성 컨텍스트에서 변화된 데이터를 감지해 DB로 flush가 수행되면서 자동 업데이트 됨
+    }
+
+    @Transactional
+    public void createReply(Reply reply, int boardId,User user) {
+
+        Board board = boardRepository.findById(boardId).orElseThrow(()->{
+            return new IllegalArgumentException("댓글쓰기 실패: 게시글을 찾을 수 없습니다");
+        }); //board 영속화 완료
+
+        reply.setBoard(board);
+        reply.setUser(user);
+
+        replyRepository.save(reply);
     }
 }

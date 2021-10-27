@@ -1,5 +1,6 @@
 let index = {
     init:function (){
+        //게시글 관련
         $("#btn-save").on("click",()=>{ // function(){}, ()=>{} this를 바인딩하기 위해서!!
             this.save();
         });
@@ -11,6 +12,16 @@ let index = {
         $("#btn-delete").on("click",()=>{
             this.deleteById();
         });
+
+        //댓글 관련
+        $("#btn-delete").on("click",()=>{
+            this.deleteById();
+        });
+
+        $("#btn-reply-save").on("click",()=>{
+            this.replySave();
+        });
+
     },
 
     save:function(){
@@ -78,6 +89,27 @@ let index = {
         });
     },
 
+    replySave:function(){
+        let boardId = $("#boardId").val();
+
+        let data={
+            content:$("#reply-content").val()
+        };
+
+        $.ajax({
+
+            type: "POST",
+            url: `/api/board/${boardId}/reply`,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType:"json"
+        }).done(function(res){
+            alert("댓글 작성이 완료되었습니다.");
+            location.href=`/board/${boardId}`;
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
 
 }
 

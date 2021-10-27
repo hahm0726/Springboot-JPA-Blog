@@ -4,6 +4,7 @@ import com.blog.hahmlog.config.auth.PrincipalDetail;
 import com.blog.hahmlog.dto.ResponseDto;
 import com.blog.hahmlog.model.Board;
 
+import com.blog.hahmlog.model.Reply;
 import com.blog.hahmlog.model.User;
 import com.blog.hahmlog.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,13 @@ public class BoardApiController {
     public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
         boardService.updateBoard(id,board);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
+    }
+
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<Integer> save(@PathVariable int boardId,
+                                     @RequestBody Reply reply,
+                                     @AuthenticationPrincipal PrincipalDetail principal){ //user = {username, password, email}
+        boardService.createReply(reply, boardId, principal.getUser());
+        return new ResponseDto<>(HttpStatus.OK.value(),1); // 자바 오브젝트를 json 으로 변환해 반환(Jackson)
     }
 }

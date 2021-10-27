@@ -1,5 +1,6 @@
 package com.blog.hahmlog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +36,9 @@ public class Board {
     private User user; //DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다
 
     @OneToMany(mappedBy = "board", fetch=FetchType.EAGER) // mappedBy 연관관계의 주인이 아니다(난 FK가 아니예요). DB에 칼럼을 만들지 마세요
-    private List<Reply> reply;
+    @JsonIgnoreProperties({"board"})
+    @OrderBy("id desc")
+    private List<Reply> replies;
 
     @CreationTimestamp
     private Timestamp createDate;
