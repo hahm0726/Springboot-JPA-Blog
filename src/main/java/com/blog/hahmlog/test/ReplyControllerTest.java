@@ -1,9 +1,9 @@
 package com.blog.hahmlog.test;
 
-import com.blog.hahmlog.model.Board;
-import com.blog.hahmlog.model.Reply;
-import com.blog.hahmlog.repository.BoardRepository;
-import com.blog.hahmlog.repository.ReplyRepository;
+import com.blog.hahmlog.board.model.Board;
+import com.blog.hahmlog.reply.model.Reply;
+import com.blog.hahmlog.board.repository.BoardRepository;
+import com.blog.hahmlog.reply.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

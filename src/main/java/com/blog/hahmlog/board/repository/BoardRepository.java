@@ -1,9 +1,7 @@
-package com.blog.hahmlog.repository;
+package com.blog.hahmlog.board.repository;
 
-import com.blog.hahmlog.model.Board;
+import com.blog.hahmlog.board.model.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.Optional;
 
 //JpaRepository가 서비스로직을 기본적으로 다 들고있어 기본 CRUD를 별도로 구현하지 않아도 됨
 //DAO의 역할을 해줌

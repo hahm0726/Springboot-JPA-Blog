@@ -16,8 +16,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: true
+    generate-ddl: false
     hibernate:
-      ddl-auto: update #create: 프로젝트를 실행할 때마다 새로 만듦
+      ddl-auto: create #create: 프로젝트를 실행할 때마다 새로 만듦
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false

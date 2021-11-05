@@ -1,5 +1,7 @@
-package com.blog.hahmlog.model;
+package com.blog.hahmlog.reply.model;
 
+import com.blog.hahmlog.board.model.Board;
+import com.blog.hahmlog.user.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,10 +1,9 @@
-package com.blog.hahmlog.api;
+package com.blog.hahmlog.user.api;
 
 import com.blog.hahmlog.config.auth.PrincipalDetail;
 import com.blog.hahmlog.dto.ResponseDto;
-import com.blog.hahmlog.model.Role;
-import com.blog.hahmlog.model.User;
-import com.blog.hahmlog.service.UserService;
+import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpSession;
 
 @RestController
 public class UserApiController {

@@ -1,0 +1,7 @@
+.borderless > li{
+    border : none;
+}
+
+.heart{
+    color: #ED5565;
+}

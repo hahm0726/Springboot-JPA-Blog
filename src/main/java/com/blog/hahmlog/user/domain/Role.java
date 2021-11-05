@@ -1,4 +1,4 @@
-package com.blog.hahmlog.model;
+package com.blog.hahmlog.user.domain;
 
 
 public enum Role {

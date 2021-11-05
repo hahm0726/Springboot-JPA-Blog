@@ -1,13 +1,11 @@
-package com.blog.hahmlog.controller;
+package com.blog.hahmlog.board.controller;
 
-import com.blog.hahmlog.config.auth.PrincipalDetail;
-import com.blog.hahmlog.model.Board;
-import com.blog.hahmlog.service.BoardService;
+import com.blog.hahmlog.board.model.Board;
+import com.blog.hahmlog.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +30,7 @@ public class BoardController {
     @GetMapping("/board/{id}")
     public String findById(@PathVariable int id, Model model){
         Board board = boardService.boardDetail(id);
+        boardService.increaseBoardCount(id);
         model.addAttribute("board",board);
         return "board/detail";
     }

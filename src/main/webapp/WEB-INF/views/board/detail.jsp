@@ -3,6 +3,7 @@
 <%@include file="../layout/header.jsp" %>
 
 <div class="container">
+  <!--게시글 상단 버튼그룹 시작-->
   <div class="mb-3">
     <button class="btn btn-outline-secondary" onclick="history.back()">목록</button>
     <c:if test="${board.user.id == principal.user.id}">
@@ -10,23 +11,39 @@
       <button id="btn-delete" class="btn btn-outline-danger">삭제</button>
     </c:if>
   </div>
+  <!--게시글 상단 버튼그룹 끝-->
+  <!--게시글 제목 및 상세정보(글번호, 작성자, 작성일자, 조회수) 시작-->
   <div class="mb-3">
+    <!--게시글 제목 시작 -->
     <div>
       <h3>${board.title}</h3>
     </div>
+    <!--게시글 제목 끝 -->
+    <!--게시글 상세정보(글번호, 작성자, 작성일자, 조회수) 시작-->
     <div class="d-flex">
       글번호: <span class="mr-2"><i>${board.id}</i></span>
       작성자: <span class="mr-2"><i>${board.user.username}</i></span>
       작성일자: <span class="mr-2"><i><fmt:formatDate value="${board.createDate}" pattern="yyyy-MM-dd HH:mm"/></i></span>
-      조회수: <span><i>${board.count}</i></span>
+      조회수: <span><i>${board.viewCount}</i></span>
     </div>
+    <!--게시글 상세정보(글번호, 작성자, 작성일자, 조회수) 끝-->
   </div>
+  <!--게시글 제목 및 상세정보(글번호, 작성자, 작성일자, 조회수) 끝-->
   <hr/>
+  <!--게시글 내용 시작-->
   <div>
     <div>${board.content}</div>
+    <div class="d-flex justify-content-center">
+      <button id="btn-like" type="button" class="btn btn-lg border border-dark">
+        <i class="far fa-heart heart"></i>
+        <i class="fas fa-heart heart"></i>
+      </button>
+    </div>
   </div>
+  <!--게시글 내용 끝-->
   <hr/>
 
+  <!-- 댓글 작성 시작 -->
   <div class="card mb-2">
     <form>
       <input type="hidden" id="userId" value="${principal.user.id}"/>
@@ -39,6 +56,8 @@
       </div>
     </form>
   </div>
+  <!-- 댓글 작성 끝 -->
+  <!-- 댓글 리스트 시작 -->
   <div class="card">
     <div class="card-header">댓글 리스트</div>
     <ul id="reply-box" class="list-group">
@@ -55,6 +74,7 @@
       </c:forEach>
     </ul>
   </div>
+  <!-- 댓글 리스트 끝 -->
 
 </div>
 

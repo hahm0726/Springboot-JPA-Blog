@@ -1,4 +1,4 @@
-package com.blog.hahmlog.dto;
+package com.blog.hahmlog.reply.dto;
 
 
 import lombok.AllArgsConstructor;

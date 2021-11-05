@@ -1,4 +1,4 @@
-package com.blog.hahmlog.controller;
+package com.blog.hahmlog.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

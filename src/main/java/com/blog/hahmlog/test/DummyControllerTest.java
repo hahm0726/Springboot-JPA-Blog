@@ -1,9 +1,9 @@
 package com.blog.hahmlog.test;
 
 
-import com.blog.hahmlog.model.Role;
-import com.blog.hahmlog.model.User;
-import com.blog.hahmlog.repository.UserRepository;
+import com.blog.hahmlog.user.domain.Role;
+import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 @RestController

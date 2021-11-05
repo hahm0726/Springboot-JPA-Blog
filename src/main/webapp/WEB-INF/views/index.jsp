@@ -10,6 +10,19 @@
         <h4 class="card-title">${board.title}</h4>
         <a href="/board/${board.id}" class="btn btn-primary stretched-link">상세보기</a>
       </div>
+      <div class="card-footer bg-white border-0 d-flex justify-content-end">
+        <ul class="list-group list-group-horizontal borderless">
+          <li class="list-group-item">
+            <i class="far fa-heart"></i>&nbsp;${board.getLikeNum()}
+          </li>
+          <li class="list-group-item">
+            <i class="far fa-comments"></i>&nbsp;3
+          </li>
+          <li class="list-group-item">
+            <i class="far fa-eye"></i>&nbsp;35.6k
+          </li>
+        </ul>
+      </div>
     </div>
   </c:forEach>
   <!--게시글 카드 목록 끝-->

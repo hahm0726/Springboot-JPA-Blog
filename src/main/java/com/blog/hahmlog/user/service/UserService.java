@@ -1,14 +1,12 @@
-package com.blog.hahmlog.service;
+package com.blog.hahmlog.user.service;
 
-import com.blog.hahmlog.model.Role;
-import com.blog.hahmlog.model.User;
-import com.blog.hahmlog.repository.UserRepository;
+import com.blog.hahmlog.user.domain.Role;
+import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 //서비스 1. 트랜잭션 관리, 2. 서비스의 의미
 //2.

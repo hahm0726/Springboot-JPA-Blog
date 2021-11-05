@@ -1,13 +1,9 @@
-package com.blog.hahmlog.service;
+package com.blog.hahmlog.board.service;
 
-import com.blog.hahmlog.dto.ReplySaveRequestDto;
-import com.blog.hahmlog.model.Board;
-import com.blog.hahmlog.model.Reply;
-import com.blog.hahmlog.model.Role;
-import com.blog.hahmlog.model.User;
-import com.blog.hahmlog.repository.BoardRepository;
-import com.blog.hahmlog.repository.ReplyRepository;
-import com.blog.hahmlog.repository.UserRepository;
+import com.blog.hahmlog.board.model.Board;
+import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.board.repository.BoardRepository;
+import com.blog.hahmlog.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,13 +19,11 @@ public class BoardService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    ReplyRepository replyRepository;
 
     //글 생성 기능
     @Transactional
     public void createBoard(Board board,User user){ //title, content
-        board.setCount(0);
+        board.setViewCount(0);
         board.setUser(user);
         boardRepository.save(board);
     }
@@ -50,6 +44,17 @@ public class BoardService {
                 });
     }
 
+    //글 조회수 기능
+    @Transactional
+    public void increaseBoardCount(int id){
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> {
+                    return new IllegalArgumentException("글 조회수 증가 실패: 게시글를 찾을 수 없습니다.");
+                });
+
+        board.setViewCount(board.getViewCount()+1);
+    }
+
     //글 삭제 기능
     @Transactional
     public void deleteBoard(int id) {
@@ -66,30 +71,5 @@ public class BoardService {
         originBoard.setContent(requestBoard.getContent());
         //updateBoard 함수가 종료될 때(Service가 종료될 때) 트랜잭션이 종료. 이때 더티체킹 수행발생
         //==> 영속성 컨텍스트에서 변화된 데이터를 감지해 DB로 flush가 수행되면서 자동 업데이트 됨
-    }
-
-    @Transactional
-    public void createReply(ReplySaveRequestDto replySaveRequestDto) {
-
-        Board board = boardRepository.findById(replySaveRequestDto.getBoardId()).orElseThrow(()->{
-            return new IllegalArgumentException("댓글쓰기 실패: 게시글을 찾을 수 없습니다");
-        }); //board 영속화 완료
-
-        User user = userRepository.findById(replySaveRequestDto.getUserId()).orElseThrow(() -> {
-            return new IllegalArgumentException("댓글쓰기 실패: 유저를 찾을 수 없습니다");
-        }); //user 영속화 완료
-
-        Reply reply = Reply.builder()
-                .board(board)
-                .user(user)
-                .content(replySaveRequestDto.getContent())
-                .build();
-
-        replyRepository.save(reply);
-    }
-
-    @Transactional
-    public void deleteReply(int replyId) {
-        replyRepository.deleteById(replyId);
     }
 }

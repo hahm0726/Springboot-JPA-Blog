@@ -1,8 +1,7 @@
-package com.blog.hahmlog.repository;
+package com.blog.hahmlog.reply.repository;
 
-import com.blog.hahmlog.model.Reply;
+import com.blog.hahmlog.reply.model.Reply;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 //생략가능
 //@Repository

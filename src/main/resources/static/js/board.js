@@ -22,6 +22,9 @@ let index = {
             this.replySave();
         });
 
+        $("#btn-like").on("click",()=>{
+        });
+
     },
 
     save:function(){

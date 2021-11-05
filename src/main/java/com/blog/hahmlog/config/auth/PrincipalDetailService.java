@@ -1,7 +1,7 @@
 package com.blog.hahmlog.config.auth;
 
-import com.blog.hahmlog.model.User;
-import com.blog.hahmlog.repository.UserRepository;
+import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

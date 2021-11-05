@@ -1,8 +1,7 @@
-package com.blog.hahmlog.repository;
+package com.blog.hahmlog.user.repository;
 
-import com.blog.hahmlog.model.User;
+import com.blog.hahmlog.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 

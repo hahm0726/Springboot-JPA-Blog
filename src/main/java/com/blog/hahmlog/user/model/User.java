@@ -1,12 +1,11 @@
-package com.blog.hahmlog.model;
+package com.blog.hahmlog.user.model;
 
+import com.blog.hahmlog.user.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -32,7 +31,6 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    //@ColumnDefault("user")
     //DB는 Role이라는 타입이 없다
     @Enumerated(EnumType.STRING)
     private Role role; //Enum 을 쓰는게 좋다. - admin, user, manager
