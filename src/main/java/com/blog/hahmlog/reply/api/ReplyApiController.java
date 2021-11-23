@@ -2,7 +2,7 @@ package com.blog.hahmlog.reply.api;
 
 import com.blog.hahmlog.reply.dto.ReplySaveRequestDto;
 import com.blog.hahmlog.dto.ResponseDto;
-import com.blog.hahmlog.reply.service.ReplyService;
+import com.blog.hahmlog.reply.service.ReplyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class ReplyApiController {
 
     @Autowired
-    ReplyService replyService;
+    ReplyServiceImpl replyService;
 
     // 데이터 받을 때는 컨트롤러에서 dto를 만들어서 받는게 좋음
     // dto를 사용하지 않은 이유는? => 작은 프로젝트라 적용하지 않음

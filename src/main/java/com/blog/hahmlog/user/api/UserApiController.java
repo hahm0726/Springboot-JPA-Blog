@@ -3,7 +3,6 @@ package com.blog.hahmlog.user.api;
 import com.blog.hahmlog.config.auth.PrincipalDetail;
 import com.blog.hahmlog.dto.ResponseDto;
 import com.blog.hahmlog.user.dto.UserRequestDto;
-import com.blog.hahmlog.user.domain.model.User;
 import com.blog.hahmlog.user.dto.UserResponseDto;
 import com.blog.hahmlog.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
