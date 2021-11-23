@@ -2,7 +2,9 @@ package com.blog.hahmlog.user.api;
 
 import com.blog.hahmlog.config.auth.PrincipalDetail;
 import com.blog.hahmlog.dto.ResponseDto;
-import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.dto.UserRequestDto;
+import com.blog.hahmlog.user.domain.model.User;
+import com.blog.hahmlog.user.dto.UserResponseDto;
 import com.blog.hahmlog.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,34 +28,25 @@ public class UserApiController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/auth/joinProc")
-    public ResponseDto<Integer> save(@RequestBody User user){ //user = {username, password, email}
-        //실제로 DB에 insert 하고 아래에서 return
-        System.out.println("UserApiController: save 호출됨");
-        userService.signUp(user);
+    public ResponseDto<Integer> save(@RequestBody UserRequestDto userRequestDto){
+        userService.signUp(userRequestDto);
         return new ResponseDto<>(HttpStatus.OK.value(),1); // 자바 오브젝트를 json 으로 변환해 반환(Jackson)
     }
 
     @PutMapping("/user")
-    public ResponseDto<Integer> update(@RequestBody User user, @AuthenticationPrincipal PrincipalDetail principal){ //key=value, x-www-form-urlencoded
-        userService.updateUser(user);
+    public ResponseDto<Integer> update(@RequestBody UserRequestDto userRequestDto, @AuthenticationPrincipal PrincipalDetail principal){
+        int userId = principal.getUser().getId();
+        userService.updateUserInfo(userId,userRequestDto);
         // 여기서 트랜잭션이 종료되기 때문에(서비스가 종료될 때) DB값은 변경이 됐음
         // 하지만 세션값이 변경되지 않은 상태이기 때문에 우리가 직접 세션값을 변경해줘야함
         //세션 등록
+        UserResponseDto userResponseDto = userService.findUserById(userId);
+
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword())
+                new UsernamePasswordAuthenticationToken(userRequestDto.getUsername(),userResponseDto.getPassword())
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseDto<>(HttpStatus.OK.value(),1);
     }
 
-//    @PostMapping("/api/user/login")
-//    public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
-//        System.out.println("UserApiController: login 호출됨");
-//        User principal= userService.login(user); // principal(접근주체)
-//
-//        if(principal != null){
-//            session.setAttribute("principal", principal);
-//        }
-//        return new ResponseDto<>(HttpStatus.OK.value(),1);
-//    }
 }

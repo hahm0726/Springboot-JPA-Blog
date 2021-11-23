@@ -1,6 +1,6 @@
 package com.blog.hahmlog.config.auth;
 
-import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.domain.model.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

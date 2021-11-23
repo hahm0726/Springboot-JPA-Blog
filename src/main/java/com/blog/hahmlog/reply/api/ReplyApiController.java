@@ -2,7 +2,7 @@ package com.blog.hahmlog.reply.api;
 
 import com.blog.hahmlog.reply.dto.ReplySaveRequestDto;
 import com.blog.hahmlog.dto.ResponseDto;
-import com.blog.hahmlog.reply.ReplyService;
+import com.blog.hahmlog.reply.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

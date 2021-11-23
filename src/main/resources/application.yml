@@ -8,6 +8,12 @@ server:
       force: true
 
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
+    username: hahm
+    password: yh135790
+
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -16,13 +22,13 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: true
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
-      ddl-auto: create #create: 프로젝트를 실행할 때마다 새로 만듦
+      ddl-auto: create-drop #create: 프로젝트를 실행할 때마다 새로 만듦
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
-    show-sql: false
+    show-sql: true
     properties:
       hibernate.format_sql: true
 
@@ -35,9 +41,3 @@ spring:
         charset: UTF-8
         enabled: true
         foce: true
-
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
-    username: hahm
-    password: yh135790

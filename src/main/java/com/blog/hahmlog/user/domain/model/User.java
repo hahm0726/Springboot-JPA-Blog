@@ -1,4 +1,4 @@
-package com.blog.hahmlog.user.model;
+package com.blog.hahmlog.user.domain.model;
 
 import com.blog.hahmlog.user.domain.Role;
 import lombok.AllArgsConstructor;

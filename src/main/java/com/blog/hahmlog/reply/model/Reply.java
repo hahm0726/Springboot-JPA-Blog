@@ -1,7 +1,7 @@
 package com.blog.hahmlog.reply.model;
 
 import com.blog.hahmlog.board.model.Board;
-import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.domain.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,11 +25,11 @@ public class Reply {
     @Column(nullable = false, length = 200)
     private String content;
 
-    @ManyToOne //Many=Reply, One=Board
+    @ManyToOne(fetch = FetchType.LAZY) //Many=Reply, One=Board
     @JoinColumn(name="boardId")
     private Board board;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userId")
     private User user;
 

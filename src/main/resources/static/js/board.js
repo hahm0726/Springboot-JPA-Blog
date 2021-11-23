@@ -21,10 +21,6 @@ let index = {
         $("#btn-reply-save").on("click",()=>{
             this.replySave();
         });
-
-        $("#btn-like").on("click",()=>{
-        });
-
     },
 
     save:function(){
@@ -70,9 +66,9 @@ let index = {
     },
 
     update:function(){
-        let boardId = $("#boardId").val();
 
         let data={
+            boardId:$("#boardId").val(),
             title:$("#title").val(),
             content:$("#content").val()
         };
@@ -80,13 +76,13 @@ let index = {
         $.ajax({
             //글수정 요청
             type: "PUT",
-            url: "/api/board/" + boardId,
+            url: "/api/board/",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType:"json"
         }).done(function(res){
             alert("수정이 완료되었습니다.");
-            location.href="/board/"+boardId;
+            location.href="/board/"+data.boardId;
         }).fail(function(error){
             alert(JSON.stringify(error));
         });

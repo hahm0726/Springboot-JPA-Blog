@@ -1,15 +1,19 @@
-package com.blog.hahmlog.reply;
+package com.blog.hahmlog.reply.service;
 
 import com.blog.hahmlog.board.model.Board;
 import com.blog.hahmlog.board.repository.BoardRepository;
+import com.blog.hahmlog.reply.dto.ReplyResponseDto;
 import com.blog.hahmlog.reply.dto.ReplySaveRequestDto;
 import com.blog.hahmlog.reply.model.Reply;
 import com.blog.hahmlog.reply.repository.ReplyRepository;
-import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.domain.model.User;
 import com.blog.hahmlog.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ReplyService {
@@ -22,6 +26,19 @@ public class ReplyService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Transactional(readOnly = true)
+    public List<ReplyResponseDto> getBoardsReplies(int boardId){
+        System.out.println("댓글 찾기 시작");
+        List<Reply> replies = replyRepository.findRepliesByBoardIdWithUser(boardId);
+        System.out.println("댓글 찾기 성공");
+
+        List<ReplyResponseDto> dtos = new ArrayList<>();
+        replies.stream().forEach(reply ->{
+            dtos.add(new ReplyResponseDto(reply));
+        });
+        return dtos;
+    }
 
     @Transactional
     public void createReply(ReplySaveRequestDto replySaveRequestDto) {

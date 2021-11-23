@@ -3,6 +3,7 @@
 <%@include file="layout/header.jsp" %>
 
 <div class="container">
+
   <!--게시글 카드 목록 시작-->
   <c:forEach var="board" items="${boards.content}">
     <div class="card m-3">
@@ -13,13 +14,10 @@
       <div class="card-footer bg-white border-0 d-flex justify-content-end">
         <ul class="list-group list-group-horizontal borderless">
           <li class="list-group-item">
-            <i class="far fa-heart"></i>&nbsp;${board.getLikeNum()}
+            <i class="far fa-comments"></i>&nbsp;${board.replyCount}
           </li>
           <li class="list-group-item">
-            <i class="far fa-comments"></i>&nbsp;3
-          </li>
-          <li class="list-group-item">
-            <i class="far fa-eye"></i>&nbsp;35.6k
+            <i class="far fa-eye"></i>&nbsp;${board.viewCount}
           </li>
         </ul>
       </div>
@@ -54,6 +52,14 @@
     </c:choose>
     <!--다음 페이지 버튼 끝 -->
   </ul>
+  <form>
+    <select name="pageNum" class="custom-select">
+      <option selected>Custom Select Menu</option>
+      <option value="volvo">Volvo</option>
+      <option value="fiat">Fiat</option>
+      <option value="audi">Audi</option>
+    </select>
+  </form>
 </div>
 
 <%@include file="layout/footer.jsp" %>

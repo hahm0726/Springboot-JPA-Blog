@@ -1,6 +1,6 @@
 package com.blog.hahmlog.user.repository;
 
-import com.blog.hahmlog.user.model.User;
+import com.blog.hahmlog.user.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
